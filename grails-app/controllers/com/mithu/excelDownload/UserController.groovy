@@ -6,6 +6,8 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class UserController {
 
+    ExcelDownloadService excelDownloadService
+
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -103,5 +105,13 @@ class UserController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def downloadUserList() {
+        List headers = ["First Name", "Last Name", "Salary"]
+        List properties = ["firstName", "lastName", "salary"]
+        List data = User.list()
+        List totalFields = ["Salary"]
+        excelDownloadService.save("UserList", headers, properties, data, response, totalFields)
     }
 }

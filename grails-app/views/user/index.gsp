@@ -24,5 +24,9 @@
                 <g:paginate total="${userCount ?: 0}" />
             </div>
         </div>
+
+
+    <a href="/user/downloadUserList">Download User List</a>
+
     </body>
 </html>
